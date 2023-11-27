@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    namespace 'com.nighttwo1.launchme'
-    compileSdk 33
+    namespace 'com.nighttwo1.currency'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.nighttwo1.launchme"
-        minSdk 23
+        applicationId "com.nighttwo1.currency"
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"

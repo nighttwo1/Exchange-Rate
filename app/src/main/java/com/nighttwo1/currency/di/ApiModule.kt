@@ -1,6 +1,6 @@
-package com.nighttwo1.launchme.di
+package com.nighttwo1.currency.di
 
-import com.nighttwo1.launchme.ApiService
+import com.nighttwo1.currency.ApiService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -11,7 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
-import com.nighttwo1.launchme.BuildConfig
+import com.nighttwo1.currency.BuildConfig
 
 @Module
 @InstallIn(SingletonComponent::class)

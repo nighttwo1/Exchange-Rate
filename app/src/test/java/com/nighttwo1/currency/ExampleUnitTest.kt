@@ -1,4 +1,4 @@
-package com.nighttwo1.launchme
+package com.nighttwo1.currency
 
 import org.junit.Test
 
