@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 interface CurrencyRepository {
-    fun getExchangeRate(from: Currency, to: Currency): Flow<NetworkResult<ExchangeRate>>
+    fun getCurrencyRate(from: Currency, to: Currency): Flow<NetworkResult<ExchangeRate>>
 }

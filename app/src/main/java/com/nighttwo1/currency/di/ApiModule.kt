@@ -1,23 +1,30 @@
 package com.nighttwo1.currency.di
 
-import com.nighttwo1.currency.ApiService
-import com.squareup.moshi.Moshi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.nighttwo1.currency.BuildConfig
+import com.nighttwo1.data.service.CurrencyService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.*
+import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import java.io.IOException
 import javax.inject.Singleton
-import com.nighttwo1.currency.BuildConfig
 
+/**
+ * [API 정보](https://exchangeratesapi.io/documentation/)
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class ApiModule {
     @Provides
-    fun provideBaseUrl() = ""
+    fun provideBaseUrl() = BuildConfig.API_BASE_URL
 
     @Provides
     @Singleton
@@ -26,9 +33,11 @@ class ApiModule {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(RequestInterceptor())
             .build()
     } else OkHttpClient
         .Builder()
+        .addInterceptor(RequestInterceptor())
         .build()
 
     @Provides
@@ -36,15 +45,24 @@ class ApiModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
         baseUrl: String,
-        moshi: Moshi
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaTypeOrNull()!!))
             .client(okHttpClient)
             .build()
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+    fun provideCurrencyService(retrofit: Retrofit): CurrencyService = retrofit.create(CurrencyService::class.java)
+}
+
+class RequestInterceptor : Interceptor {
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
+        val newRequest = request().url.newBuilder()
+            .addQueryParameter("access_key", BuildConfig.API_KEY)
+            .build()
+        proceed(chain.request().newBuilder().url(newRequest).build())
+    }
 }

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        mainViewModel.getExchangeRate()
+        mainViewModel.getLatestExchangeRate()
 
         lifecycleScope.launch {
             mainViewModel.exchangeRate.collectLatest { exchangeRateResult ->
@@ -55,21 +55,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         val adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.simple_items,
-            android.R.layout.simple_spinner_dropdown_item
+            this, R.array.simple_items, android.R.layout.simple_spinner_dropdown_item
         )
 
         binding.item.setAdapter(adapter)
 
-        // Set an item selected listener for AutoCompleteTextView
         binding.item.setOnItemClickListener { parent, view, position, id ->
-            // Handle the selected item
             val selectedItem = parent.getItemAtPosition(position).toString()
-            // Do something with the selected item
             mainViewModel.currencyFrom.value = Currency.getInstance(selectedItem)
             binding.layoutAmountFrom.suffixText = mainViewModel.currencyFrom.value.currencyCode
-            mainViewModel.getExchangeRate()
+            mainViewModel.getLatestExchangeRate()
         }
     }
 
