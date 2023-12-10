@@ -93,6 +93,7 @@ fun ExchangeRateContent(
     Surface(modifier = Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
+                modifier = Modifier.fillMaxWidth(),
                 imageVector = CurrencyIcons.Bg,
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "Bg",
