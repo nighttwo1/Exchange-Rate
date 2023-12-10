@@ -4,4 +4,6 @@
     <style name="YourCustomTextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <!-- 추가적인 설정 -->`
     </style>
+
+    <style name="Theme.Currency" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>
