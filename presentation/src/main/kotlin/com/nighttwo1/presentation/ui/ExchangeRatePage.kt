@@ -198,6 +198,7 @@ fun ExchangeRateContent(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(30.dp))
             Text(
                 text = "Indicative Exchange Rate",
                 fontSize = 16.sp,
@@ -206,7 +207,7 @@ fun ExchangeRateContent(
             )
             Text(
                 text = if (exchangeRate != -1.0) {
-                    "1${currencyFrom.value} = ${exchangeRate}${currencyTo.value}"
+                    "1 ${currencyFrom.value} = ${exchangeRate} ${currencyTo.value}"
                 } else {
                     "Exchange rate not found"
                 },
