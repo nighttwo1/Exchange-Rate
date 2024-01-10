@@ -1,4 +1,4 @@
-package com.nighttwo1.currency.di
+package com.nighttwo1.data.module
 
 import com.nighttwo1.data.repository.CurrencyRepositoryImpl
 import com.nighttwo1.domain.repository.CurrencyRepository

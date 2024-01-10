@@ -1,7 +1,7 @@
-package com.nighttwo1.currency.di
+package com.nighttwo1.data.module
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.nighttwo1.currency.BuildConfig
+import com.nighttwo1.data.BuildConfig
 import com.nighttwo1.data.service.CurrencyService
 import dagger.Module
 import dagger.Provides

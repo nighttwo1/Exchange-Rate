@@ -7,9 +7,6 @@ plugins {
     id 'kotlinx-serialization'
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 android {
     namespace 'com.nighttwo1.currency'
     compileSdk 34
@@ -25,9 +22,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-
-        buildConfigField "String", "API_KEY", properties["api_key"]
-        buildConfigField "String", "API_BASE_URL", properties["api_base_url"]
     }
 
     buildTypes {
